@@ -1,7 +1,49 @@
 <!DOCTYPE html>
-<html>
+
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+input[type=text]{
+    width:520px;
+    height:50px;
+}
+.upload{
+    width: 450px;
+    font-size: 20px;
+    margin-left: 25px;
+}
+button:focus {
+    outline: 0;
+}
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding-left: 50px;
+    text-align: center;
+    border-style: solid;
+    border-width: 5px;
+    background-color: aliceblue;
+    opacity:0.9;
+}
+
+.container {
+    padding: 50px 25px;
+}
+
+button {
+    margin-bottom: 10px;
+}
+</style>
+    <title>Smart Photo Album</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">
+    <link rel="stylesheet" href="style1.css">
     <script type="text/javascript" src="lib/axios/dist/axios.standalone.js"></script>
     <script type="text/javascript" src="lib/CryptoJS/rollups/hmac-sha256.js"></script>
     <script type="text/javascript" src="lib/CryptoJS/rollups/sha256.js"></script>
@@ -13,32 +55,51 @@
     <script type="text/javascript" src="lib/apiGatewayCore/simpleHttpClient.js"></script>
     <script type="text/javascript" src="lib/apiGatewayCore/utils.js"></script>
     <script type="text/javascript" src="apigClient.js"></script>
-    <script type="text/javascript" src="speech.js"></script>
-    <script type="text/javascript" src="script.js"></script>
 </head>
+
 <body style="background-image: url('BG.jpeg'); background-size: 100%;">
-	 <div class="container" style="text-align: center; height:100%;">
-	 	<div>
-  	 	<form>
-      	  <input type="text" id="search" placeholder="Search" style="height:45px;font-size:20px;border:0px;border-radius:4px;padding-left:8px;padding-right:8px;"/>
-          <i class="fa fa-search fa-2x" onclick="submitSearch()" style="padding: 0px 2px 8px 2px; vertical-align: middle;"></i>
-          <i class="fa fa-microphone fa-2x" id="microphone_icon" onclick="audioProcessing()" style="padding: 0px 2px 6px 2px; vertical-align: middle;"></i>
-  		</form>
-  		<div id="searchResponse"></div>
-		</div>
-		<div >
-			<br><br>
-			<label for="img" class = "fa fa-cloud-upload" style="height:40px;font-size:20px;" ></label>
-  			<input type="file" id="imgfile" name="img" accept="image/*" onchange="previewFile(this);" style="height:40px;width:220px;font-size:15px;"><br>
-			<input type="text" id="customquery" placeholder="Add Custom Query" style="height:25px;font-size:15px;border:0px;border-radius:4px;padding-left:8px;padding-right:8px;"/><br><br>
-			<input type="submit" id="submit_upload_button" onclick="uploadImage(event)" style="height:40px;font-size:20px;border:0px;border-radius:6px;"> 
-  			<div id="uploadResponse"></div>
-		</div>
-		<table width="100%" style="height: 100%;" border="0">
-		  <tr>
-		    <td><p id="displayImages"/></td>
-		  </tr>
-		</table>
-	</div>
+    <div class="container">
+        <div class="app">
+            <div class="heading">
+                <h1 style="text-align:center">Smart Photo Album</h1>
+            </div>
+            <div>
+                <h3 style="margin-top:30px;text-align:center">Search a photo</h3>
+            </div>
+            <div class="input-group">
+                <input id="note-textarea" type="text" class="form-control" placeholder="Search for a photo" name="search">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit" onclick="searchPhoto()">  <i class="fa fa-search"></i>
+                    <button class="btn btn-default" type="submit" onclick="audioProcessing()">  <i class="fa fa-microphone fa"></i>
+                    </button>
+                </div>
+            </div>
+			<div>
+                <h3 style="margin-top:30px;text-align:center">Custom Labels</h3>
+            </div>
+			<div class="input-group">
+                <input id="note-textarea" type="text" class="form-control" placeholder="Add Custom Labels" name="customlabels">
+            </div>
+            <h3 style="text-align:center">Upload a new photo</h3>
+            <div class="input-group" style="margin-top:30px;">
+                <input type="file" class="form-control upload" name="search" id="file_path">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit" onclick="uploadPhoto()">Upload</button>
+                </div>
+            </div>
+        </div>
+        <div></div>
+        <p id="uploadText"></p>
+        <div>
+            <div class="banner-section" id="img-container">
+                <p id="displaytext"></p>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="recorder.js"></script>
+    <script src="trans.js"></script>
+    <script src="apigClient.js"></script>
 </body>
+
 </html>
