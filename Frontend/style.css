@@ -3,7 +3,7 @@ ul {
     padding: 0;
   }
   body {
-    background: url('new-bg.jpg');
+    background: url('BG.jpeg');
     background-size: cover;
   }
   p {
@@ -121,8 +121,4 @@ ul {
     #bsaHolder {
       display: none;
     }
-  }
-  
-  .input-group-btn {
-    /* background-color: #1da7da; */
   }

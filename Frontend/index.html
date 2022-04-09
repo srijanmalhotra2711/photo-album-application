@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Smart Photo Album</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -20,42 +19,42 @@
     <script type="text/javascript" src="apigClient.js"></script>
 </head>
 
-<body>
-    <h1 style="text-align: center;
+<body >
+    <h2 style="text-align: center;
     font-size: 60px;
-    font-style: italic;">SMART PHOTO ALBUM</h1>
+    font-style: italic;">SMART PHOTO ALBUM</h2>
     <div class="container">
         <div class="app">
             <div class="heading">
             </div>
             <div>
-                <h3 style="margin-top:30px;text-align:center;font-size: 30px;font-weight: bold;font-family: cursive;">Search for photos</h3>
+                <h3 style="margin-top:30px;text-align:center;font-size: 30px;font-weight: bold;">Search for photos</h3>
             </div>
             <div class="input-group">
-                <input id="note-textarea" type="text" class="form-control" placeholder="Search for a photo" name="search" style="font-family: cursive;">
+                <input id="note-textarea" type="text" class="form-control" placeholder="Search for a photo" name="search">
                 <div class="input-group-btn">
                     <button class="btn btn-default" type="submit" onclick="searchPhoto()">  <i class="fa fa-search"></i>
                     </button>
                     <button id="start-record-btn" class="btn btn-default" type="submit">Record</button>
                 </div>
             </div>
-            <h3 style="margin-top:30px;text-align:center;font-size: 30px;font-weight: bold;font-family: cursive;">OR</h3>
-            <h3 style="margin-top:30px;text-align:center;font-size: 30px;font-weight: bold;font-family: cursive;">Upload a new photo</h3>
+            <h3 style="margin-top:30px;text-align:center;font-size: 30px;font-weight: bold;">OR</h3>
+            <h3 style="margin-top:30px;text-align:center;font-size: 30px;font-weight: bold;">Upload a new photo</h3>
             <div>
-                    <input type="text" id='custom_labels' name="custom_labels" style="font-family:cursive;" placeholder="Custom Labels">
+                    <input type="text" id='custom_labels' name="custom_labels" placeholder="Custom Labels">
             </div>
             <div class="input-group" style="margin-top:30px;">
-                <input type="file" class="form-control upload" name="search" id="file_path" style="font-family: cursive">
+                <input type="file" class="form-control upload" name="search" id="file_path">
                 <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit" onclick="uploadPhoto()" style="font-family: cursive;">Upload</button>
+                    <button class="btn btn-default" type="submit" onclick="uploadPhoto()">Upload</button>
                 </div>
             </div>
         </div>
         <div></div>
-        <p id="uploadText" style="font-family: cursive; color: #000; font-size: 20px;"></p>
+        <p id="uploadText" color: #000; font-size: 20px;></p>
         <div>
             <div class="banner-section" id="img-container">
-                <p id="displaytext" style="font-family: cursive; color: #000; font-size: 20px;"></p>
+                <p id="displaytext" color: #000; font-size: 20px;></p>
             </div>
         </div>
     </div>
