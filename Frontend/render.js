@@ -1,5 +1,3 @@
-document.getElementById('displaytext').style.display = 'none';
-
 function searchPhoto() {
   var apigClient = apigClientFactory.newClient();
 
@@ -7,6 +5,13 @@ function searchPhoto() {
 
   var body = {};
   var params = { 'q': user_message };
+
+  if(params['q']=="")
+  {
+    alert("No Search Query Found. Enter keyword to Search!");
+  }
+  console.log(params['q']);
+
   var additionalParams = {
     headers: {
       'Content-Type': 'application/json',
@@ -20,24 +25,34 @@ function searchPhoto() {
       var data_array = [];
       resp_data = res.data;
       length_of_response = resp_data.length;
+
+      console.log("LEN RES", length_of_response);
+
+      console.log("Result : ", res);
+
+      var photosDiv = document.getElementById("img-container");
+      photosDiv.innerHTML = "";
+
       if (length_of_response == 0) {
-        document.getElementById('displaytext').innerHTML =
-          'No Images Found !!!';
-        document.getElementById('displaytext').style.display = 'block';
+        photosDiv.innerHTML = '<h2 style="text-align: center;font-size: 25px;font-style: bold;margin-top:30px;">No Images Found !!!</h2>';
       }
 
-      resp_data.forEach(function (obj) {
-    
-        var img = new Image();
-        console.log(obj);
-        img.src = obj;
-        img.setAttribute('class', 'banner-img');
-        img.setAttribute('alt', 'effy');
-        document.getElementById('displaytext').innerHTML =
-          'Images returned are : ';
-        document.getElementById('img-container').appendChild(img);
-        document.getElementById('displaytext').style.display = 'block';
-      });
+      else {
+
+      photosDiv.innerHTML = '<h2 style="text-align: center;font-size: 25px;font-style: bold;margin-top:30px;margin-bottom:30px;">Here are your images: </h2>';
+
+      image_paths = res["data"];
+      console.log(image_paths);
+        console.log(photosDiv);
+        for (n = 0; n < image_paths.length; n++) {
+            images_list = image_paths[n].split('/');
+            imageName = images_list[images_list.length - 1];
+            photosDiv.innerHTML += '<figure><img src="' + image_paths[n] + '" style="width:25%"><figcaption>' + imageName + '</figcaption></figure>';
+
+         } 
+        
+        console.log(photosDiv);
+    }
     })
     .catch(function (result) {});
 }
@@ -46,7 +61,6 @@ function getBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    // reader.onload = () => resolve(reader.result)
     reader.onload = () => {
       let encoded = reader.result.replace(/^data:(.*;base64,)?/, '');
       if (encoded.length % 4 > 0) {
@@ -59,8 +73,14 @@ function getBase64(file) {
 }
 
 function uploadPhoto() {
+  var filePath = (document.getElementById('file_path').value).split("\\");
+  console.log(filePath);
   var file = document.getElementById('file_path').files[0];
   const reader = new FileReader();
+  console.log(filePath);
+  if ((filePath == "") || (!['png', 'jpg', 'jpeg'].includes(filePath.toString().split(".")[1]))) {
+        alert("Please upload a valid .png/.jpg/.jpeg file!");
+    } else {
       let config = {
                 headers:{'Content-Type': file.type,'x-amz-meta-customlabels': custom_labels.value}
             };
@@ -68,44 +88,7 @@ function uploadPhoto() {
             url = 'https://aouazqh4h0.execute-api.us-east-1.amazonaws.com/dev/upload/bass2/' + file.name
             console.log(url)
             axios.put(url,file,config).then(response=>{
-                // console.log(response.data)
                 alert("Upload successful!!");
             })
-
-  // var file_data;
-  // var encoded_image = getBase64(file).then((data) => {
-  //   // console.log(data);
-  //   var apigClient = apigClientFactory.newClient();
-
-  //   var file_type = file.type + ';base64';
-  //   //var file_type = file.type;
-
-
-  //   console.log(file.type);
-  //   console.log(custom_labels.value);
-
-  //   var body = data;
-  //   var params = {
-  //     key: file.name,
-  //     bucket: 'bass2',
-  //     'x-amz-meta-customlabels': custom_labels.value,
-  //     'Accept': 'image/*',
-  //     'Content-Type': file.type,
-  //     'Access-Control-Allow-Origin': '*',
-  //     'Access-Control-Allow-Headers': '*',
-  //     'Access-Control-Allow-Methods': '*'
-  //   };
-  //   console.log(params);
-  //   var additionalParams = {
-  //   };
-  //   apigClient
-  //     .uploadBucketKeyPut(params, body, additionalParams)
-  //     .then(function (res) {
-  //       if (res.status == 200) {
-  //         document.getElementById('uploadText').innerHTML =
-  //           'Image Uploaded  !!!';
-  //         document.getElementById('uploadText').style.display = 'block';
-  //       }
-  //     });
-  // });
+          }
 }

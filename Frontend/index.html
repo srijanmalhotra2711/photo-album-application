@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <head>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,49 +16,47 @@
     <script type="text/javascript" src="lib/apiGatewayCore/simpleHttpClient.js"></script>
     <script type="text/javascript" src="lib/apiGatewayCore/utils.js"></script>
     <script type="text/javascript" src="apigClient.js"></script>
-       <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body >
-    <h2 style="text-align: center;
-    font-size: 60px;
-    font-style: bold;">SMART PHOTO ALBUM</h2>
+    <h2 style="text-align: center;font-size: 60px;font-style: bold;margin-top:30px;">SMART PHOTO ALBUM</h2>
     <div class="container">
         <div class="app">
-            <div class="heading">
-            </div>
+            <div class="heading"></div>
             <div>
-                <h3 style="margin-top:30px;text-align:center;font-size: 30px;font-weight: bold;">Search for photos</h3>
+                <h2 style="text-align: center;font-size: 40px;font-style: bold;">SEARCH</h2>
             </div>
-            <div class="input-group">
-                <input id="note-textarea" type="text" class="form-control" placeholder="Search for a photo" name="search">
+            <div class="input-group" style="margin-top:30px">
+                <input id="note-textarea"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum. type="text" class="form-control" placeholder="Enter search keyword" name="search">
                 <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit" onclick="searchPhoto()">  <i class="fa fa-search"></i>
-                    </button>
-                    <button id="start-record-btn" class="btn btn-default" type="submit">Record</button>
+                    <button class="btn btn-default" type="line1" onclick="searchPhoto()">  <i class="fa fa-search"></i></button>
+                    <button id="start-record-btn" class="btn btn-default" type="line1"><i class="fa fa-microphone"></i></button>
                 </div>
             </div>
-            <h3 style="margin-top:30px;text-align:center;font-size: 30px;font-weight: bold;">OR</h3>
-            <h3 style="margin-top:30px;text-align:center;font-size: 30px;font-weight: bold;">Upload a new photo</h3>
-            <div>
-                    <input type="text" id='custom_labels' name="custom_labels" placeholder="Custom Labels">
+            <h2 style="text-align: center;font-size: 40px;font-style: bold;margin-top:30px;">--------------------</h2>
+            <h2 style="text-align: center;font-size: 40px;font-style: bold;margin-top:30px;">UPLOAD</h2>
+            <div class="center" style="margin-top:30px" >
+                <input type="file" class="form-control upload" name="search" id="file_path">
             </div>
             <div class="input-group" style="margin-top:30px;">
-                <input type="file" class="form-control upload" name="search" id="file_path">
-                <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit" onclick="uploadPhoto()">Upload</button>
-                </div>
+                    <input type="text" id='custom_labels' name="custom_labels" placeholder="OPTIONAL: Custom Labels (comma separated)">
+                    <button class="btn btn-default" type="line2" onclick="uploadPhoto()"><i class="fa fa-upload"></i></button>
             </div>
         </div>
-        <div></div>
-        <p id="uploadText" color: #000; font-size: 20px;></p>
         <div>
-            <div class="banner-section" id="img-container">
-                <p id="displaytext" color: #000; font-size: 20px;></p>
-            </div>
+            <p id="uploadText" color: #000; font-size: 20px;></p>
+        </div>
+        <div>
+            <div id="img-container" class="output-group"></div>
         </div>
     </div>
-     <script type="text/javascript" src="lib/axios/dist/axios.standalone.js"></script>
+    <script type="text/javascript" src="lib/axios/dist/axios.standalone.js"></script>
     <script type="text/javascript" src="lib/CryptoJS/rollups/hmac-sha256.js"></script>
     <script type="text/javascript" src="lib/CryptoJS/rollups/sha256.js"></script>
     <script type="text/javascript" src="lib/CryptoJS/components/hmac.js"></script>
@@ -74,5 +71,4 @@
     <script src="render.js"></script>
     <script src="apigClient.js"></script>
 </body>
-
 </html>
