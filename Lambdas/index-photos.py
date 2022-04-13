@@ -19,15 +19,19 @@ def lambda_handler(event, context):
         size = record['s3']['object']['size']
         metadata = s3.head_object(Bucket=bucket, Key=key)
         
+        print("-----meta-----", metadata)
+        
+        #print("-----KEY-----", key)
         #Detecting the label of the current image
         labels = rek.detect_labels(
             Image={
                 'S3Object': {
                     'Bucket': bucket,
-                    'Name': key
+                    'Name': str(key)
                 }
             },
-            MaxLabels=10
+            MaxLabels=10,
+            MinConfidence=50
         )
         
         print("IMAGE LABELS---- {}".format(labels['Labels']))
@@ -74,8 +78,8 @@ def lambda_handler(event, context):
         return {
             'statusCode': 200,
             'headers': {
-                'Access-Control-Allow-Headers': 'x-amz-meta-customlabels,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
-                'Access-Control-Allow-Origin': 'http://photoalbumass2.s3-website-us-east-1.amazonaws.com',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'OPTIONS,POST,GET,PUT'
             },
             'body': json.dumps("Image labels have been detected successfully!")

@@ -34,7 +34,7 @@ def lambda_handler(event, context):
     
     headers = { "Content-Type": "application/json" }
     
-    
+    result = []
     for i in keywords:
         
         print("keyword --- {}".format(i))
@@ -52,18 +52,19 @@ def lambda_handler(event, context):
         
         print("----DATA----", data)
         
-        result=[]
-        
         for idx in data['hits']['hits']:
             key = idx['_source']['objectKey']
-            url_res = boto3.client('s3').generate_presigned_url(
-            ClientMethod='get_object',
-            Params={'Bucket': 'bass2', 'Key': key},
-            ExpiresIn=3600)
-            result.append(url_res)
-        print(result)
+            url_res = "https://bass2.s3.amazonaws.com/"+key
+            if(url_res not in result):
+                result.append(url_res)
+        print("-----RESULT-----",result)
     
     return {
         'statusCode': 200,
-        'body': json.dumps(result)
+        'body': json.dumps(result),
+        'headers':{
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, OPTIONS'
+        }
     }
