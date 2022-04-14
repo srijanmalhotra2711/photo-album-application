@@ -6,7 +6,7 @@ from datetime import *
 
 def lambda_handler(event, context):
     print("EVENT ---- {}".format(json.dumps(event)))
-    
+    #TESTING PIPELINE
     headers = {"Content-Type": "application/json"}
     
     s3 = boto3.client('s3')
